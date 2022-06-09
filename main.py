@@ -8,8 +8,8 @@ cubeEdges = ((0, 1), (0, 3), (0, 4), (1, 2), (1, 5), (2, 3), (2, 6), (3, 7), (4,
              (6, 7))  # Определяет вершины, которые необходимо соединить
 
 
-def vid(x, y, z):
-    r = np.sqrt(x ** 2 + y ** 2 + z ** 2)
+def vid(x, y, z): # Мировые в видовые
+    r = np.sqrt(x ** 2 + y ** 2 + z ** 2) 
     fi = np.arctan(y / x)
     tet = np.arccos(z / np.sqrt(x ** 2 + y ** 2 + z ** 2))
     cdvig = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [-x, -y, -z, 1]])
@@ -19,7 +19,7 @@ def vid(x, y, z):
     cos_s = np.cos(np.pi - tet)
     sin_s = np.sin(np.pi - tet)
     list_x = np.array([[1, 0, 0, 0], [0, cos_s, sin_s, 0], [0, -sin_s, cos_s, 0], [0, 0, 0, 1]])
-    m_x = np.array([[-1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
+    m_x = np.array([[-1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]) # первод
     return cdvig.dot(list_z.dot(list_x.dot(m_x)))
 
 
@@ -33,48 +33,48 @@ def cube(vidov, screen):
 
 def rotation_right_x():
     global cubeVertices
-    cos_s = np.cos(np.pi / 180)
-    sin_s = np.sin(np.pi / 180)
+    cos_s = np.cos(np.pi / 180 * 2)
+    sin_s = np.sin(np.pi / 180 * 2)
     list_a = [[1, 0, 0, 0], [0, cos_s, -sin_s, 0], [0, sin_s, cos_s, 0], [0, 0, 0, 1]]
     cubeVertices = cubeVertices.dot(list_a)
 
 
 def rotation_left_x():
     global cubeVertices
-    cos_s = np.cos(-np.pi / 180)
-    sin_s = np.sin(-np.pi / 180)
+    cos_s = np.cos(-np.pi / 180 * 2)
+    sin_s = np.sin(-np.pi / 180 * 2)
     list_a = [[1, 0, 0, 0], [0, cos_s, -sin_s, 0], [0, sin_s, cos_s, 0], [0, 0, 0, 1]]
     cubeVertices = cubeVertices.dot(list_a)
 
 
 def rotation_right_y():
     global cubeVertices
-    cos_s = np.cos(np.pi / 180)
-    sin_s = np.sin(np.pi / 180)
+    cos_s = np.cos(np.pi / 180 * 2)
+    sin_s = np.sin(np.pi / 180 * 2)
     list_a = [[cos_s, 0, sin_s, 0], [0, 1, 0, 0], [-sin_s, 0, cos_s, 0], [0, 0, 0, 1]]
     cubeVertices = cubeVertices.dot(list_a)
 
 
 def rotation_left_y():
     global cubeVertices
-    cos_s = np.cos(-np.pi / 180)
-    sin_s = np.sin(-np.pi / 180)
+    cos_s = np.cos(-np.pi / 180 * 2)
+    sin_s = np.sin(-np.pi / 180 * 2)
     list_a = [[cos_s, 0, sin_s, 0], [0, 1, 0, 0], [-sin_s, 0, cos_s, 0], [0, 0, 0, 1]]
     cubeVertices = cubeVertices.dot(list_a)
 
 
 def rotation_right_z():
     global cubeVertices
-    cos_s = np.cos(np.pi / 180)
-    sin_s = np.sin(np.pi / 180)
+    cos_s = np.cos(np.pi / 180 * 2)
+    sin_s = np.sin(np.pi / 180 * 2)
     list_a = np.array([[cos_s, -sin_s, 0, 0], [sin_s, cos_s, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
     cubeVertices = cubeVertices.dot(list_a)
 
 
 def rotation_left_z():
     global cubeVertices
-    cos_s = np.cos(-np.pi / 180)
-    sin_s = np.sin(-np.pi / 180)
+    cos_s = np.cos(-np.pi / 180 * 2)
+    sin_s = np.sin(-np.pi / 180 * 2)
     list_a = [[cos_s, -sin_s, 0, 0], [sin_s, cos_s, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
     cubeVertices = cubeVertices.dot(list_a)
 
@@ -82,7 +82,6 @@ def rotation_left_z():
 def main():
     pygame.init()
     screen = pygame.display.set_mode((500, 500))  # Устанавливаем размер экрана
-    pygame.display.set_caption("Кубик")  # Задаём имя для окна
     vidov_matrix = vid(10, 10, 10)
     while True:
         for event in pygame.event.get():
